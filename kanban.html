@@ -1,0 +1,1017 @@
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h2>Bảng Kanban</h2>
+            <button class="btn" id="add-task-btn">
+                <i class="fas fa-plus"></i> Thêm công việc
+            </button>
+        </div>
+
+        <div class="filter-container">
+            <div class="filter-group">
+                <span class="filter-label">Dự án:</span>
+                <select class="filter-select" id="project-filter">
+                    <option value="">Tất cả dự án</option>
+                    <option value="1">Thiết kế Website</option>
+                    <option value="2">Phát triển Mobile App</option>
+                    <option value="3">Nâng cấp hệ thống CRM</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Người được giao:</span>
+                <select class="filter-select" id="assignee-filter">
+                    <option value="">Tất cả</option>
+                    <option value="1">Nguyễn Văn A</option>
+                    <option value="2">Trần Thị B</option>
+                    <option value="3">Lê Văn C</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="kanban-board">
+            <!-- Cột Cần Làm -->
+            <div class="kanban-column">
+                <div class="column-header">
+                    <div class="column-title">
+                        <div class="column-icon icon-todo">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <span>Cần làm</span>
+                        <span class="column-count">3</span>
+                    </div>
+                </div>
+                <div class="kanban-tasks" id="todo-tasks">
+                    <div class="task-card" data-id="task1" draggable="true">
+                        <div class="task-project">Thiết kế Website</div>
+                        <div class="task-title">Thiết kế trang đăng ký</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-high"></div>
+                                <span>Cao</span>
+                            </div>
+                            <div class="task-due">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>10/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">NVA</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-card" data-id="task2" draggable="true">
+                        <div class="task-project">Phát triển Mobile App</div>
+                        <div class="task-title">Viết tài liệu API</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-low"></div>
+                                <span>Thấp</span>
+                            </div>
+                            <div class="task-due">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>17/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">TTB</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-card" data-id="task3" draggable="true">
+                        <div class="task-project">Nâng cấp hệ thống CRM</div>
+                        <div class="task-title">Cài đặt môi trường test</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-medium"></div>
+                                <span>Trung bình</span>
+                            </div>
+                            <div class="task-due">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>15/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">LVC</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột Đang Tiến Hành -->
+            <div class="kanban-column">
+                <div class="column-header">
+                    <div class="column-title">
+                        <div class="column-icon icon-progress">
+                            <i class="fas fa-spinner"></i>
+                        </div>
+                        <span>Đang tiến hành</span>
+                        <span class="column-count">2</span>
+                    </div>
+                </div>
+                <div class="kanban-tasks" id="progress-tasks">
+                    <div class="task-card" data-id="task4" draggable="true">
+                        <div class="task-project">Thiết kế Website</div>
+                        <div class="task-title">Thiết kế giao diện trang chủ</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-high"></div>
+                                <span>Cao</span>
+                            </div>
+                            <div class="task-due overdue">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>10/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">NVA</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-card" data-id="task5" draggable="true">
+                        <div class="task-project">Nâng cấp hệ thống CRM</div>
+                        <div class="task-title">Tối ưu hóa cơ sở dữ liệu</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-high"></div>
+                                <span>Cao</span>
+                            </div>
+                            <div class="task-due overdue">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>05/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">LVC</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột Đánh Giá -->
+            <div class="kanban-column">
+                <div class="column-header">
+                    <div class="column-title">
+                        <div class="column-icon icon-review">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <span>Đánh giá</span>
+                        <span class="column-count">1</span>
+                    </div>
+                </div>
+                <div class="kanban-tasks" id="review-tasks">
+                    <div class="task-card" data-id="task6" draggable="true">
+                        <div class="task-project">Phát triển Mobile App</div>
+                        <div class="task-title">Phát triển chức năng đăng nhập</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-medium"></div>
+                                <span>Trung bình</span>
+                            </div>
+                            <div class="task-due">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>05/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">TTB</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột Hoàn Thành -->
+            <div class="kanban-column">
+                <div class="column-header">
+                    <div class="column-title">
+                        <div class="column-icon icon-done">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span>Hoàn thành</span>
+                        <span class="column-count">2</span>
+                    </div>
+                </div>
+                <div class="kanban-tasks" id="done-tasks">
+                    <div class="task-card" data-id="task7" draggable="true">
+                        <div class="task-project">Thiết kế Website</div>
+                        <div class="task-title">Kiểm thử tính năng thanh toán</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-high"></div>
+                                <span>Cao</span>
+                            </div>
+                            <div class="task-due">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>07/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">TTB</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-card" data-id="task8" draggable="true">
+                        <div class="task-project">Phát triển Mobile App</div>
+                        <div class="task-title">Thiết kế logo ứng dụng</div>
+                        <div class="task-meta">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-low"></div>
+                                <span>Thấp</span>
+                            </div>
+                            <div class="task-due">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>03/04/2025</span>
+                            </div>
+                        </div>
+                        <div class="task-footer">
+                            <div class="avatar">NVA</div>
+                            <div class="task-actions">
+                                <div class="action-btn">
+                                    <i class="fas fa-paperclip"></i>
+                                </div>
+                                <div class="action-btn">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Công Việc -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Thêm công việc mới</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="task-form">
+                    <div class="form-group">
+                        <label for="task-name">Tên công việc</label>
+                        <input type="text" id="task-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-description">Mô tả</label>
+                        <textarea id="task-description"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-project">Dự án</label>
+                            <select id="task-project" required>
+                                <option value="">Chọn dự án</option>
+                                <option value="1">Thiết kế Website</option>
+                                <option value="2">Phát triển Mobile App</option>
+                                <option value="3">Nâng cấp hệ thống CRM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-status">Trạng thái</label>
+                            <select id="task-status" required>
+                                <option value="todo">Cần làm</option>
+                                <option value="progress">Đang tiến hành</option>
+                                <option value="review">Đánh giá</option>
+                                <option value="done">Hoàn thành</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-priority">Ưu tiên</label>
+                            <select id="task-priority" required>
+                                <option value="low">Thấp</option>
+                                <option value="medium">Trung bình</option>
+                                <option value="high">Cao</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-assignee">Người được giao</label>
+                            <select id="task-assignee" required>
+                                <option value="">Chọn người</option>
+                                <option value="1">Nguyễn Văn A</option>
+                                <option value="2">Trần Thị B</option>
+                                <option value="3">Lê Văn C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-sla">SLA (ngày)</label>
+                            <input type="number" id="task-sla" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-start-date">Ngày bắt đầu</label>
+                            <input type="date" id="task-start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-due-date">Ngày hạn chót</label>
+                            <input type="date" id="task-due-date" required>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-cancel">Hủy</button>
+                        <button type="submit" class="btn">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chi Tiết Công Việc -->
+    <div class="modal" id="task-detail-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Chi tiết công việc</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="task-detail-header">
+                    <div class="detail-project">Thiết kế Website</div>
+                    <div class="detail-title">Thiết kế giao diện trang chủ</div>
+                    <div class="detail-status-container">
+                        <span class="status status-progress">Đang tiến hành</span>
+                    </div>
+                </div>
+
+                <div class="detail-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Ưu tiên</span>
+                        <span class="meta-value">
+                            <div class="task-priority">
+                                <div class="priority-indicator priority-high"></div>
+                                <span>Cao</span>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Người được giao</span>
+                        <span class="meta-value">Nguyễn Văn A</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">SLA</span>
+                        <span class="meta-value">5 ngày</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Ngày bắt đầu</span>
+                        <span class="meta-value">05/04/2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Hạn chót</span>
+                        <span class="meta-value overdue">10/04/2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Người tạo</span>
+                        <span class="meta-value">Admin</span>
+                    </div>
+                </div>
+
+                <div class="detail-description">
+                    <h4 class="section-title">Mô tả</h4>
+                    <div class="description-text">
+                        Thiết kế giao diện trang chủ cho website với các yêu cầu sau:
+                        <br>- Responsive cho các thiết bị
+                        <br>- Tối ưu trải nghiệm người dùng
+                        <br>- Phù hợp với nhận diện thương hiệu
+                        <br>- Tích hợp các thành phần tương tác hiện đại
+                    </div>
+                </div>
+
+                <div class="detail-attachments">
+                    <h4 class="section-title">Tài liệu đính kèm</h4>
+                    <div class="attachment-list">
+                        <div class="attachment-item">
+                            <i class="fas fa-file-image"></i>
+                            <span>wireframe.jpg</span>
+                        </div>
+                        <div class="attachment-item">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>style_guide.pdf</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-comments">
+                    <h4 class="section-title">Bình luận</h4>
+                    <div class="comment-item">
+                        <div class="avatar">AT</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">Admin</span>
+                                <span class="comment-time">06/04/2025 14:30</span>
+                            </div>
+                            <div class="comment-text">
+                                Xin hãy tham khảo style guide mới nhất. Cần tập trung vào UX cho thiết bị di động.
+                            </div>
+                        </div>
+                    </div>
+                    <div<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectTrack - Bảng Kanban</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-light: #4c9aff;
+            --secondary: #6554c0;
+            --success: #36b37e;
+            --warning: #ffab00;
+            --danger: #ff5630;
+            --gray-dark: #172b4d;
+            --gray: #505f79;
+            --gray-light: #f4f5f7;
+            --white: #ffffff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0047b3;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .filter-select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        /* Kanban Board Styles */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .kanban-column {
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            height: calc(100vh - 180px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .column-header {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .column-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .column-count {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 12px;
+        }
+
+        .column-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .icon-todo {
+            color: var(--primary);
+        }
+
+        .icon-progress {
+            color: var(--warning);
+        }
+
+        .icon-review {
+            color: var(--secondary);
+        }
+
+        .icon-done {
+            color: var(--success);
+        }
+
+        .kanban-tasks {
+            padding: 10px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .task-card {
+            background-color: var(--white);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .task-project {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .task-title {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 10px;
+        }
+
+        .task-priority {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .priority-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .priority-high {
+            background-color: var(--danger);
+        }
+
+        .priority-medium {
+            background-color: var(--warning);
+        }
+
+        .priority-low {
+            background-color: var(--success);
+        }
+
+        .task-due {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .overdue {
+            color: var(--danger);
+        }
+
+        .avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background-color: var(--gray-light);
+            color: var(--primary);
+        }
+
+        /* Add Task Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(23, 43, 77, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-cancel {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-cancel:hover {
+            background-color: #e4e6ea;
+        }
+
+        .show {
+            display: flex;
+        }
+
+        /* Task detail modal */
+        .task-detail-header {
+            margin-bottom: 20px;
+        }
+
+        .detail-project {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .detail-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .detail-status-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-todo {
+            background-color: rgba(76, 154, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .status-progress {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .status-review {
+            background-color: rgba(101, 84, 192, 0.1);
+            color: var(--secondary);
+        }
+
+        .status-done {
+            background-color: rgba(54, 179, 126, 0.1);
+            color: var(--success);
+        }
+
+        .status-overdue {
+            background-color: rgba(255, 86, 48, 0.1);
+            color: var(--danger);
+        }
+
+        .detail-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            background-color: var(--gray-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .detail-description {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .description-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .detail-attachments {
+            margin-bottom: 20px;
+        }
+
+        .attachment-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: var(--gray-light);
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .attachment-item i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .detail-comments {
+            margin-bottom: 20px;
+        }
+
+        .comment-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .comment-content {
+            flex: 1;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .comment-author {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .comment-time {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .comment-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .new-comment {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .comment-input {
+            flex: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .kanban-board {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .kanban-column {
+                height: auto;
+                max-height: 500px;
+                margin-bottom: 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }

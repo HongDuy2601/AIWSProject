@@ -1,0 +1,1675 @@
+<button class="btn" id="add-event-btn">
+    <i class="fas fa-plus"></i> Thêm sự kiện
+</button>
+</div>
+
+<div class="filter-container">
+<div class="filter-group">
+    <span class="filter-label">Dự án:</span>
+    <select class="filter-select" id="project-filter">
+        <option value="">Tất cả dự án</option>
+        <option value="1">Thiết kế Website</option>
+        <option value="2">Phát triển Mobile App</option>
+        <option value="3">Nâng cấp hệ thống CRM</option>
+        <option value="4">Tối ưu SEO</option>
+    </select>
+</div>
+<div class="filter-group">
+    <span class="filter-label">Loại sự kiện:</span>
+    <select class="filter-select" id="event-type-filter">
+        <option value="">Tất cả</option>
+        <option value="project">Dự án</option>
+        <option value="task">Công việc</option>
+        <option value="meeting">Cuộc họp</option>
+        <option value="deadline">Hạn chót</option>
+    </select>
+</div>
+</div>
+
+<div class="calendar-navigation">
+<div class="calendar-title">Tháng 4, 2025</div>
+<div class="calendar-controls">
+    <div class="nav-btn" id="prev-btn">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="nav-btn" id="today-btn">
+        <i class="fas fa-calendar-day"></i>
+    </div>
+    <div class="nav-btn" id="next-btn">
+        <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="view-options">
+        <div class="view-option active" data-view="month">Tháng</div>
+        <div class="view-option" data-view="week">Tuần</div>
+        <div class="view-option" data-view="day">Ngày</div>
+        <div class="view-option" data-view="list">Danh sách</div>
+    </div>
+</div>
+</div>
+
+<div class="calendar-container">
+<div class="calendar-main">
+    <!-- Month View -->
+    <div class="calendar-month active-view" id="month-view">
+        <div class="calendar-grid">
+            <div class="calendar-header">
+                <div class="calendar-day-header">CN</div>
+                <div class="calendar-day-header">T2</div>
+                <div class="calendar-day-header">T3</div>
+                <div class="calendar-day-header">T4</div>
+                <div class="calendar-day-header">T5</div>
+                <div class="calendar-day-header">T6</div>
+                <div class="calendar-day-header">T7</div>
+            </div>
+            
+            <!-- Tuần 1 -->
+            <div class="calendar-row">
+                <div class="calendar-cell other-month">
+                    <div class="calendar-day">
+                        <span class="day-number">30</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell other-month">
+                    <div class="calendar-day">
+                        <span class="day-number">31</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">1</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-project">Bắt đầu dự án Website</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">2</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-task">Phát triển chức năng đăng nhập</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">3</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">4</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">5</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-deadline">Hạn chót - Tối ưu DB</div>
+                        <div class="event event-deadline">Hạn chót - Đăng nhập</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tuần 2 -->
+            <div class="calendar-row">
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">6</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">7</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-deadline">Hạn chót - Kiểm thử thanh toán</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">8</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell today">
+                    <div class="calendar-day">
+                        <span class="day-number">9</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-meeting">Họp Sprint Review</div>
+                        <div class="event event-task">Lập báo cáo tiến độ</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">10</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-deadline">Hạn chót - UI trang chủ</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">11</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">12</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tuần 3 -->
+            <div class="calendar-row">
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">13</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">14</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-deadline">Hạn chót - Mobile App</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">15</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-deadline">Hạn chót - Dự án Website</div>
+                        <div class="event event-meeting">Demo khách hàng</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">16</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">17</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="events-container">
+                        <div class="event event-deadline">Hạn chót - Viết tài liệu API</div>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">18</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">19</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tuần 4 -->
+            <div class="calendar-row">
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">20</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">21</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">22</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">23</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">24</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">25</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">26</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tuần 5 -->
+            <div class="calendar-row">
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">27</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">28</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">29</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell">
+                    <div class="calendar-day">
+                        <span class="day-number">30</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell other-month">
+                    <div class="calendar-day">
+                        <span class="day-number">1</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell other-month">
+                    <div class="calendar-day">
+                        <span class="day-number">2</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="calendar-cell other-month">
+                    <div class="calendar-day">
+                        <span class="day-number">3</span>
+                        <span class="add-event"><i class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Week View -->
+    <div class="calendar-week" id="week-view">
+        <!-- Implement week view with hours -->
+    </div>
+
+    <!-- Day View -->
+    <div class="calendar-day-view" id="day-view">
+        <!-- Implement day view with hours -->
+    </div>
+
+    <!-- List View -->
+    <div class="calendar-list" id="list-view">
+        <!-- Implement list view of events -->
+    </div>
+</div>
+
+<div class="calendar-sidebar">
+    <!-- Mini Calendar -->
+    <div class="card mini-calendar">
+        <div class="mini-calendar-header">
+            <div class="mini-calendar-title">Tháng 4, 2025</div>
+            <div class="mini-calendar-controls">
+                <div class="mini-nav-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="mini-nav-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mini-calendar-grid">
+            <div class="mini-calendar-day-header">CN</div>
+            <div class="mini-calendar-day-header">T2</div>
+            <div class="mini-calendar-day-header">T3</div>
+            <div class="mini-calendar-day-header">T4</div>
+            <div class="mini-calendar-day-header">T5</div>
+            <div class="mini-calendar-day-header">T6</div>
+            <div class="mini-calendar-day-header">T7</div>
+            
+            <!-- Dates will be populated dynamically -->
+            <div class="mini-calendar-cell other-month">30</div>
+            <div class="mini-calendar-cell other-month">31</div>
+            <div class="mini-calendar-cell has-events">1</div>
+            <div class="mini-calendar-cell has-events">2</div>
+            <div class="mini-calendar-cell">3</div>
+            <div class="mini-calendar-cell">4</div>
+            <div class="mini-calendar-cell has-events">5</div>
+            
+            <div class="mini-calendar-cell">6</div>
+            <div class="mini-calendar-cell has-events">7</div>
+            <div class="mini-calendar-cell">8</div>
+            <div class="mini-calendar-cell today has-events">9</div>
+            <div class="mini-calendar-cell has-events">10</div>
+            <div class="mini-calendar-cell">11</div>
+            <div class="mini-calendar-cell">12</div>
+            
+            <div class="mini-calendar-cell">13</div>
+            <div class="mini-calendar-cell has-events">14</div>
+            <div class="mini-calendar-cell has-events">15</div>
+            <div class="mini-calendar-cell">16</div>
+            <div class="mini-calendar-cell has-events">17</div>
+            <div class="mini-calendar-cell">18</div>
+            <div class="mini-calendar-cell">19</div>
+            
+            <div class="mini-calendar-cell">20</div>
+            <div class="mini-calendar-cell">21</div>
+            <div class="mini-calendar-cell">22</div>
+            <div class="mini-calendar-cell">23</div>
+            <div class="mini-calendar-cell">24</div>
+            <div class="mini-calendar-cell">25</div>
+            <div class="mini-calendar-cell">26</div>
+            
+            <div class="mini-calendar-cell">27</div>
+            <div class="mini-calendar-cell">28</div>
+            <div class="mini-calendar-cell">29</div>
+            <div class="mini-calendar-cell">30</div>
+            <div class="mini-calendar-cell other-month">1</div>
+            <div class="mini-calendar-cell other-month">2</div>
+            <div class="mini-calendar-cell other-month">3</div>
+        </div>
+    </div>
+
+    <!-- Upcoming Events -->
+    <div class="card upcoming-events">
+        <div class="upcoming-events-header">
+            <div class="sidebar-title">Sự kiện sắp tới</div>
+            <div class="view-all">Xem tất cả</div>
+        </div>
+        
+        <div class="upcoming-event event-task-border">
+            <div class="upcoming-event-title">Lập báo cáo tiến độ</div>
+            <div class="upcoming-event-time">Hôm nay, 14:00 - 15:00</div>
+            <div class="upcoming-event-project">Thiết kế Website</div>
+        </div>
+        
+        <div class="upcoming-event event-meeting-border">
+            <div class="upcoming-event-title">Họp Sprint Review</div>
+            <div class="upcoming-event-time">Hôm nay, 16:00 - 17:00</div>
+            <div class="upcoming-event-project">Tất cả dự án</div>
+        </div>
+        
+        <div class="upcoming-event event-deadline-border">
+            <div class="upcoming-event-title">Hạn chót - UI trang chủ</div>
+            <div class="upcoming-event-time">Ngày mai, 17:00</div>
+            <div class="upcoming-event-project">Thiết kế Website</div>
+        </div>
+        
+        <div class="upcoming-event event-deadline-border">
+            <div class="upcoming-event-title">Hạn chót - Mobile App</div>
+            <div class="upcoming-event-time">14/04/2025, 17:00</div>
+            <div class="upcoming-event-project">Phát triển Mobile App</div>
+        </div>
+    </div>
+
+    <!-- My Calendars -->
+    <div class="card">
+        <div class="my-calendars-header">
+            <div class="sidebar-title">Lịch của tôi</div>
+        </div>
+        
+        <div class="calendar-item">
+            <input type="checkbox" class="calendar-checkbox" checked>
+            <div class="calendar-color color-project"></div>
+            <div class="calendar-name">Dự án</div>
+        </div>
+        
+        <div class="calendar-item">
+            <input type="checkbox" class="calendar-checkbox" checked>
+            <div class="calendar-color color-task"></div>
+            <div class="calendar-name">Công việc</div>
+        </div>
+        
+        <div class="calendar-item">
+            <input type="checkbox" class="calendar-checkbox" checked>
+            <div class="calendar-color color-meeting"></div>
+            <div class="calendar-name">Cuộc họp</div>
+        </div>
+        
+        <div class="calendar-item">
+            <input type="checkbox" class="calendar-checkbox" checked>
+            <div class="calendar-color color-deadline"></div>
+            <div class="calendar-name">Hạn chót</div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Modal Thêm Sự Kiện -->
+<div class="modal" id="event-modal">
+<div class="modal-content">
+<div class="modal-header">
+    <h3 class="modal-title">Thêm sự kiện mới</h3>
+    <button class="close-btn">&times;</button>
+</div>
+<div class="modal-body">
+    <form id="event-form">
+        <div class="form-group">
+            <label for="event-title">Tiêu đề</label>
+            <input type="text" id="event-title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="event-type">Loại sự kiện</label>
+            <select id="event-type" required>
+                <option value="project">Dự án</option>
+                <option value="task">Công việc</option>
+                <option value="meeting">Cuộc họp</option>
+                <option value="deadline">Hạn chót</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="event-project">Dự án</label>
+            <select id="event-project">
+                <option value="">Không thuộc dự án</option>
+                <option value="1">Thiết kế Website</option>
+                <option value="2">Phát triển Mobile App</option>
+                <option value="3">Nâng cấp hệ thống CRM</option>
+                <option value="4">Tối ưu SEO</option>
+            </select>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="event-start-date">Ngày bắt đầu</label>
+                <input type="date" id="event-start-date" required>
+            </div>
+            <div class="form-group">
+                <label for="event-start-time">Thời gian</label>
+                <input type="time" id="event-start-time">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="event-end-date">Ngày kết thúc</label>
+                <input type="date" id="event-end-date" required>
+            </div>
+            <div class="form-group">
+                <label for="event-end-time">Thời gian</label>
+                <input type="time" id="event-end-time">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="event-description">Mô tả</label>
+            <textarea id="event-description"></textarea>
+        </div>
+        
+        <div class="action-buttons">
+            <button type="button" class="btn btn-cancel">Hủy</button>
+            <button type="submit" class="btn">Lưu</button>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+
+<!-- Modal Chi tiết Sự kiện -->
+<div class="modal" id="event-detail-modal">
+<div class="modal-content">
+<div class="modal-header">
+    <h3 class="modal-title">Chi tiết sự kiện</h3>
+    <button class="close-btn">&times;</button>
+</div>
+<div class="modal-body">
+    <h2 id="detail-title">Họp Sprint Review</h2>
+    <p id="detail-time"><i class="far fa-clock"></i> 09/04/2025, 16:00 - 17:00</p>
+    <p id="detail-project"><i class="fas fa-project-diagram"></i> Tất cả dự án</p>
+    <hr>
+    <p id="detail-description">
+        Họp đánh giá tiến độ sprint hiện tại. Chuẩn bị demo các tính năng đã hoàn thành và thảo luận về các vấn đề gặp phải.
+    </p>
+    
+    <div class="action-buttons">
+        <button type="button" class="btn btn-danger">Xóa</button>
+        <button type="button" class="btn btn-secondary">Chỉnh sửa</button>
+    </div>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Modal handling
+const eventModal = document.getElementById('event-modal');
+const eventDetailModal = document.getElementById('event-detail-modal');
+const addEventBtn = document.getElementById('add-event-btn');
+const closeBtns = document.querySelectorAll('.close-btn');
+const cancelBtns = document.querySelectorAll('.btn-cancel');
+
+// Open Add Event Modal
+addEventBtn.addEventListener('click', function() {
+    eventModal.classList.add('show');
+});
+
+// Handle clicks on event cards to show detail modal
+const events = document.querySelectorAll('.event');
+events.forEach(event => {
+    event.addEventListener('click', function(e) {
+        e.stopPropagation();
+        eventDetailModal.classList.add('show');
+    });
+});
+
+// Close modals
+closeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        eventModal.classList.remove('show');
+        eventDetailModal.classList.remove('show');
+    });
+});
+
+cancelBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        eventModal.classList.remove('show');
+        eventDetailModal.classList.remove('show');
+    });
+});
+
+// Calendar View Switching
+const viewOptions = document.querySelectorAll('.view-option');
+viewOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove active class from all options
+        viewOptions.forEach(opt => opt.classList.remove('active'));
+        // Add active class to clicked option
+        this.classList.add('active');
+        
+        // Hide all views
+        document.getElementById('month-view').classList.remove('active-view');
+        document.getElementById('week-view').classList.remove('active-view');
+        document.getElementById('day-view').classList.remove('active-view');
+        document.getElementById('list-view').classList.remove('active-view');
+        
+        // Show selected view
+        const viewId = this.getAttribute('data-view') + '-view';
+        document.getElementById(viewId).classList.add('active-view');
+    });
+});
+
+// Form submission
+const eventForm = document.getElementById('event-form');
+eventForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Here you would collect form data and add the event
+    // For demonstration, we'll just close the modal
+    eventModal.classList.remove('show');
+    alert('Sự kiện đã được thêm thành công!');
+});
+
+// Calendar navigation
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const todayBtn = document.getElementById('today-btn');
+
+// These would normally update the calendar to show different months/weeks/days
+prevBtn.addEventListener('click', function() {
+    alert('Chuyển đến tháng trước');
+});
+
+nextBtn.addEventListener('click', function() {
+    alert('Chuyển đến tháng sau');
+});
+
+todayBtn.addEventListener('click', function() {
+    alert('Chuyển đến ngày hôm nay');
+});
+
+// Calendar filters
+const projectFilter = document.getElementById('project-filter');
+const eventTypeFilter = document.getElementById('event-type-filter');
+
+projectFilter.addEventListener('change', function() {
+    // Filter events based on project
+    console.log('Lọc theo dự án:', this.value);
+});
+
+eventTypeFilter.addEventListener('change', function() {
+    // Filter events based on type
+    console.log('Lọc theo loại sự kiện:', this.value);
+});
+
+// Liên kết với trang chính - thông báo cho trang chính biết đang ở trang Calendar
+setTimeout(function() {
+    try {
+        window.parent.postMessage({ action: 'selectTab', tab: 'calendar' }, '*');
+    } catch (e) {
+        console.log('Could not communicate with parent window:', e);
+    }
+}, 100);
+
+// Lắng nghe thông báo từ trang chính
+window.addEventListener('message', function(event) {
+    console.log('Received message from parent:', event.data);
+});
+
+// Modal handling
+const eventModal = document.getElementById('event-modal');
+const eventDetailModal = document.getElementById('event-detail-modal');
+const addEventBtn = document.getElementById('add-event-btn');
+const closeBtns = document.querySelectorAll('.close-btn');
+const cancelBtns = document.querySelectorAll('.btn-cancel');
+
+// Open Add Event Modal
+addEventBtn.addEventListener('click', function() {
+    eventModal.classList.add('show');
+});
+
+// Handle clicks on event cards to show detail modal
+const events = document.querySelectorAll('.event');
+events.forEach(event => {
+    event.addEventListener('click', function(e) {
+        e.stopPropagation();
+        eventDetailModal.classList.add('show');
+    });
+});
+
+// Close modals
+closeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        eventModal.classList.remove('show');
+        eventDetailModal.classList.remove('show');
+    });
+});
+
+cancelBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        eventModal.classList.remove('show');
+        eventDetailModal.classList.remove('show');
+    });
+});
+
+// Calendar View Switching
+const viewOptions = document.querySelectorAll('.view-option');
+viewOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove active class from all options
+        viewOptions.forEach(opt => opt.classList.remove('active'));
+        // Add active class to clicked option
+        this.classList.add('active');
+        
+        // Hide all views
+        document.getElementById('month-view').classList.remove('active-view');
+        document.getElementById('week-view').classList.remove('active-view');
+        document.getElementById('day-view').classList.remove('active-view');
+        document.getElementById('list-view').classList.remove('active-view');
+        
+        // Show selected view
+        const viewId = this.getAttribute('data-view') + '-view';
+        document.getElementById(viewId).classList.add('active-view');
+    });
+});
+
+// Form submission
+const eventForm = document.getElementById('event-form');
+eventForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Here you would collect form data and add the event
+    // For demonstration, we'll just close the modal
+    eventModal.classList.remove('show');
+    alert('Sự kiện đã được thêm thành công!');
+});
+
+// Calendar navigation
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const todayBtn = document.getElementById('today-btn');
+
+// These would normally update the calendar to show different months/weeks/days
+prevBtn.addEventListener('click', function() {
+    alert('Chuyển đến tháng trước');
+});
+
+nextBtn.addEventListener('click', function() {
+    alert('Chuyển đến tháng sau');
+});
+
+todayBtn.addEventListener('click', function() {
+    alert('Chuyển đến ngày hôm nay');
+});
+
+// Calendar filters
+const projectFilter = document.getElementById('project-filter');
+const eventTypeFilter = document.getElementById('event-type-filter');
+
+projectFilter.addEventListener('change', function() {
+    // Filter events based on project
+    console.log('Lọc theo dự án:', this.value);
+});
+
+eventTypeFilter.addEventListener('change', function() {
+    // Filter events based on type
+    console.log('Lọc theo loại sự kiện:', this.value);
+});
+
+// Initialize mini calendar interactions
+const miniDays = document.querySelectorAll('.mini-calendar-cell');
+miniDays.forEach(day => {
+    day.addEventListener('click', function() {
+        // Would normally switch to that day in the main calendar
+        const dayNum = this.textContent;
+        alert(`Chọn ngày ${dayNum}`);
+    });
+});
+});
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProjectTrack - Lịch</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+--primary: #0052cc;
+--primary-light: #4c9aff;
+--secondary: #6554c0;
+--success: #36b37e;
+--warning: #ffab00;
+--danger: #ff5630;
+--gray-dark: #172b4d;
+--gray: #505f79;
+--gray-light: #f4f5f7;
+--white: #ffffff;
+--shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: var(--gray-light);
+color: var(--gray-dark);
+}
+
+.container {
+padding: 20px;
+}
+
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.btn {
+background-color: var(--primary);
+color: var(--white);
+border: none;
+border-radius: 4px;
+padding: 8px 16px;
+cursor: pointer;
+font-size: 14px;
+font-weight: 500;
+display: flex;
+align-items: center;
+gap: 5px;
+transition: all 0.2s;
+}
+
+.btn:hover {
+background-color: #0047b3;
+}
+
+.btn-secondary {
+background-color: var(--secondary);
+}
+
+.btn-secondary:hover {
+background-color: #5648a8;
+}
+
+.card {
+background-color: var(--white);
+border-radius: 8px;
+padding: 20px;
+box-shadow: var(--shadow);
+margin-bottom: 20px;
+}
+
+.filter-container {
+display: flex;
+gap: 15px;
+margin-bottom: 20px;
+flex-wrap: wrap;
+}
+
+.filter-group {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.filter-label {
+font-weight: 500;
+font-size: 14px;
+}
+
+.filter-select {
+padding: 8px;
+border-radius: 4px;
+border: 1px solid #ddd;
+font-size: 14px;
+}
+
+/* Calendar Navigation */
+.calendar-navigation {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.calendar-title {
+font-size: 20px;
+font-weight: 600;
+}
+
+.calendar-controls {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.nav-btn {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+background-color: var(--white);
+color: var(--gray-dark);
+box-shadow: var(--shadow);
+transition: all 0.2s;
+}
+
+.nav-btn:hover {
+background-color: var(--primary);
+color: var(--white);
+}
+
+.view-options {
+display: flex;
+background-color: var(--white);
+border-radius: 4px;
+box-shadow: var(--shadow);
+overflow: hidden;
+margin-left: 10px;
+}
+
+.view-option {
+padding: 8px 15px;
+cursor: pointer;
+font-size: 14px;
+transition: all 0.2s;
+}
+
+.view-option.active {
+background-color: var(--primary);
+color: var(--white);
+}
+
+.view-option:hover:not(.active) {
+background-color: var(--gray-light);
+}
+
+/* Calendar Month View */
+.calendar-month {
+background-color: var(--white);
+border-radius: 8px;
+box-shadow: var(--shadow);
+overflow: hidden;
+}
+
+.calendar-grid {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-header {
+background-color: var(--gray-light);
+font-weight: 500;
+}
+
+.calendar-day-header {
+padding: 10px;
+text-align: center;
+border-bottom: 1px solid #ddd;
+}
+
+.calendar-row {
+display: contents;
+}
+
+.calendar-cell {
+min-height: 120px;
+border-right: 1px solid #eee;
+border-bottom: 1px solid #eee;
+padding: 8px;
+position: relative;
+}
+
+.calendar-cell:last-child {
+border-right: none;
+}
+
+.calendar-day {
+font-weight: 500;
+margin-bottom: 8px;
+font-size: 14px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.day-number {
+width: 24px;
+height: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%;
+}
+
+.today .day-number {
+background-color: var(--primary);
+color: var(--white);
+}
+
+.other-month {
+background-color: #f9f9f9;
+color: #aaa;
+}
+
+.add-event {
+width: 20px;
+height: 20px;
+background-color: var(--primary-light);
+color: var(--white);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 12px;
+cursor: pointer;
+opacity: 0;
+transition: opacity 0.2s;
+}
+
+.calendar-cell:hover .add-event {
+opacity: 1;
+}
+
+.events-container {
+overflow-y: auto;
+max-height: 80px;
+}
+
+.event {
+padding: 4px 6px;
+margin-bottom: 4px;
+border-radius: 3px;
+font-size: 12px;
+color: var(--white);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+cursor: pointer;
+}
+
+.event-project {
+background-color: var(--primary);
+}
+
+.event-task {
+background-color: var(--secondary);
+}
+
+.event-meeting {
+background-color: var(--warning);
+}
+
+.event-deadline {
+background-color: var(--danger);
+}
+
+.more-events {
+font-size: 11px;
+color: var(--gray);
+text-align: center;
+cursor: pointer;
+}
+
+/* Week View */
+.calendar-week {
+display: none;
+background-color: var(--white);
+border-radius: 8px;
+box-shadow: var(--shadow);
+overflow: hidden;
+}
+
+.week-container {
+display: grid;
+grid-template-columns: 60px repeat(7, 1fr);
+}
+
+.week-header {
+display: contents;
+}
+
+.week-header-cell {
+padding: 10px;
+text-align: center;
+background-color: var(--gray-light);
+border-bottom: 1px solid #ddd;
+border-right: 1px solid #eee;
+font-weight: 500;
+}
+
+.time-column {
+grid-column: 1;
+border-right: 1px solid #ddd;
+}
+
+.time-slot {
+height: 60px;
+padding: 5px;
+text-align: center;
+border-bottom: 1px solid #eee;
+font-size: 12px;
+color: var(--gray);
+}
+
+.week-grid {
+display: contents;
+}
+
+.day-column {
+display: grid;
+grid-template-rows: repeat(24, 60px);
+border-right: 1px solid #eee;
+}
+
+.day-column:last-child {
+border-right: none;
+}
+
+.week-cell {
+border-bottom: 1px solid #eee;
+padding: 2px;
+position: relative;
+}
+
+.week-event {
+position: absolute;
+left: 2px;
+right: 2px;
+padding: 4px 6px;
+border-radius: 3px;
+font-size: 12px;
+color: var(--white);
+overflow: hidden;
+cursor: pointer;
+z-index: 5;
+}
+
+/* Day View */
+.calendar-day-view {
+display: none;
+background-color: var(--white);
+border-radius: 8px;
+box-shadow: var(--shadow);
+overflow: hidden;
+}
+
+.day-view-header {
+padding: 15px;
+text-align: center;
+background-color: var(--gray-light);
+border-bottom: 1px solid #ddd;
+font-weight: 600;
+}
+
+.day-container {
+display: grid;
+grid-template-columns: 60px 1fr;
+}
+
+.day-grid {
+display: grid;
+grid-template-rows: repeat(24, 60px);
+}
+
+.day-event {
+position: absolute;
+left: 10px;
+right: 10px;
+padding: 6px 10px;
+border-radius: 4px;
+font-size: 13px;
+color: var(--white);
+overflow: hidden;
+cursor: pointer;
+z-index: 5;
+}
+
+/* Modal Styles */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(23, 43, 77, 0.6);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+}
+
+.modal-content {
+background-color: var(--white);
+border-radius: 8px;
+padding: 25px;
+width: 100%;
+max-width: 500px;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.modal-title {
+font-size: 18px;
+font-weight: 600;
+}
+
+.close-btn {
+background: none;
+border: none;
+font-size: 20px;
+cursor: pointer;
+color: var(--gray);
+}
+
+.form-group {
+margin-bottom: 15px;
+}
+
+label {
+display: block;
+margin-bottom: 5px;
+font-weight: 500;
+font-size: 14px;
+}
+
+input, select, textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 14px;
+}
+
+textarea {
+resize: vertical;
+min-height: 100px;
+}
+
+.form-row {
+display: flex;
+gap: 15px;
+}
+
+.form-row .form-group {
+flex: 1;
+}
+
+.action-buttons {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+margin-top: 20px;
+}
+
+.btn-cancel {
+background-color: var(--gray-light);
+color: var(--gray-dark);
+}
+
+.btn-cancel:hover {
+background-color: #e4e6ea;
+}
+
+.btn-danger {
+background-color: var(--danger);
+}
+
+.btn-danger:hover {
+background-color: #e64c27;
+}
+
+.show {
+display: flex;
+}
+
+/* Calendar List View */
+.calendar-list {
+display: none;
+background-color: var(--white);
+border-radius: 8px;
+box-shadow: var(--shadow);
+overflow: hidden;
+}
+
+.list-item {
+display: flex;
+padding: 15px;
+border-bottom: 1px solid var(--gray-light);
+}
+
+.list-date {
+width: 120px;
+text-align: center;
+}
+
+.list-day {
+font-size: 22px;
+font-weight: 600;
+}
+
+.list-month {
+font-size: 14px;
+color: var(--gray);
+}
+
+.list-weekday {
+font-size: 14px;
+color: var(--gray);
+}
+
+.list-events {
+flex: 1;
+margin-left: 20px;
+}
+
+.list-event {
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+padding: 10px;
+border-radius: 4px;
+transition: all 0.2s;
+}
+
+.list-event:hover {
+background-color: var(--gray-light);
+}
+
+.list-event-time {
+width: 100px;
+font-weight: 500;
+}
+
+.list-event-indicator {
+width: 12px;
+height: 12px;
+border-radius: 50%;
+margin-right: 15px;
+}
+
+.indicator-project {
+background-color: var(--primary);
+}
+
+.indicator-task {
+background-color: var(--secondary);
+}
+
+.indicator-meeting {
+background-color: var(--warning);
+}
+
+.indicator-deadline {
+background-color: var(--danger);
+}
+
+.list-event-content {
+flex: 1;
+}
+
+.list-event-title {
+font-weight: 500;
+margin-bottom: 3px;
+}
+
+.list-event-details {
+font-size: 13px;
+color: var(--gray);
+}
+
+/* Sidebar Calendar */
+.calendar-sidebar {
+width: 280px;
+margin-left: 20px;
+}
+
+.mini-calendar {
+margin-bottom: 20px;
+}
+
+.mini-calendar-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+}
+
+.mini-calendar-title {
+font-weight: 600;
+}
+
+.mini-calendar-controls {
+display: flex;
+gap: 5px;
+}
+
+.mini-nav-btn {
+width: 24px;
+height: 24px;
+border-radius: 4px;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+background-color: var(--gray-light);
+transition: all 0.2s;
+}
+
+.mini-nav-btn:hover {
+background-color: var(--primary);
+color: var(--white);
+}
+
+.mini-calendar-grid {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+gap: 2px;
+}
+
+.mini-calendar-day-header {
+text-align: center;
+font-size: 12px;
+font-weight: 500;
+color: var(--gray);
+padding: 5px 0;
+}
+
+.mini-calendar-cell {
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 12px;
+cursor: pointer;
+border-radius: 4px;
+}
+
+.mini-calendar-cell:hover {
+background-color: var(--gray-light);
+}
+
+.mini-calendar-cell.today {
+background-color: var(--primary);
+color: var(--white);
+}
+
+.mini-calendar-cell.other-month {
+color: var(--gray);
+}
+
+.mini-calendar-cell.has-events {
+position: relative;
+}
+
+.mini-calendar-cell.has-events::after {
+content: '';
+position: absolute;
+bottom: 5px;
+width: 4px;
+height: 4px;
+border-radius: 50%;
+background-color: var(--primary);
+}
+
+/* Upcoming Events */
+.upcoming-events {
+margin-bottom: 20px;
+}
+
+.upcoming-events-header {
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.sidebar-title {
+font-weight: 600;
+font-size: 16px;
+}
+
+.view-all {
+font-size: 12px;
+color: var(--primary);
+cursor: pointer;
+}
+
+.upcoming-event {
+padding: 10px;
+border-left: 3px solid transparent;
+margin-bottom: 8px;
+border-radius: 0 4px 4px 0;
+transition: all 0.2s;
+}
+
+.upcoming-event:hover {
+background-color: var(--gray-light);
+}
+
+.event-project-border {
+border-left-color: var(--primary);
+}
+
+.event-task-border {
+border-left-color: var(--secondary);
+}
+
+.event-meeting-border {
+border-left-color: var(--warning);
+}
+
+.event-deadline-border {
+border-left-color: var(--danger);
+}
+
+.upcoming-event-title {
+font-weight: 500;
+margin-bottom: 3px;
+font-size: 14px;
+}
+
+.upcoming-event-time {
+font-size: 12px;
+color: var(--gray);
+margin-bottom: 3px;
+}
+
+.upcoming-event-project {
+font-size: 12px;
+color: var(--gray);
+}
+
+/* My Calendars */
+.my-calendars-header {
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.calendar-item {
+display: flex;
+align-items: center;
+margin-bottom: 8px;
+}
+
+.calendar-checkbox {
+margin-right: 10px;
+}
+
+.calendar-color {
+width: 12px;
+height: 12px;
+border-radius: 2px;
+margin-right: 8px;
+}
+
+.color-project {
+background-color: var(--primary);
+}
+
+.color-task {
+background-color: var(--secondary);
+}
+
+.color-meeting {
+background-color: var(--warning);
+}
+
+.color-deadline {
+background-color: var(--danger);
+}
+
+.calendar-name {
+font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+.calendar-container {
+    flex-direction: column;
+}
+
+.calendar-sidebar {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+}
+
+@media (max-width: 768px) {
+.calendar-sidebar {
+    grid-template-columns: 1fr;
+}
+
+.calendar-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-cell {
+    min-height: 80px;
+}
+
+.form-row {
+    flex-direction: column;
+    gap: 0;
+}
+}
+
+/* Active Calendar Views */
+.active-view {
+display: block;
+}
+
+/* Calendar Container */
+.calendar-container {
+display: flex;
+}
+
+.calendar-main {
+flex: 1;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="section-header">
+<h2>Lịch</h2>
+<button class="btn" id="add-event-btn">
+    <i class="fas fa-plus"></i> Thêm sự kiện
+</button

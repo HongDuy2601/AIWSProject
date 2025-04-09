@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectTrack - Quản lý Công việc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-light: #4c9aff;
+            --secondary: #6554c0;
+            --success: #36b37e;
+            --warning: #ffab00;
+            --danger: #ff5630;
+            --gray-dark: #172b4d;
+            --gray: #505f79;
+            --gray-light: #f4f5f7;
+            --white: #ffffff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        /* Phần styling từ trang chính sẽ được áp dụng */
+        .container {
+            padding: 20px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0047b3;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .filter-select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border-radius: 4px;
+            padding: 0 10px;
+            border: 1px solid #ddd;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: var(--gray-light);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-todo {
+            background-color: rgba(76, 154, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .status-progress {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .status-review {
+            background-color: rgba(101, 84, 192, 0.1);
+            color: var(--secondary);
+        }
+
+        .status-done {
+            background-color: rgba(54, 179, 126, 0.1);
+            color: var(--success);
+        }
+
+        .status-overdue {
+            background-color: rgba(255, 86, 48, 0.1);
+            color: var(--danger);
+        }
+
+        .priority {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .priority-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .priority-high {
+            background-color: var(--danger);
+        }
+
+        .priority-medium {
+            background-color: var(--warning);
+        }
+
+        .priority-low {
+            background-color: var(--success);
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .action-icon {
+            color: var(--gray);
+            cursor: pointer;
+            margin-right: 8px;
+        }
+
+        .action-icon:hover {
+            color: var(--primary);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            gap: 5px;
+        }
+
+        .page-item {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .page-item.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .page-item:hover:not(.active) {
+            background-color: var(--gray-light);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(23, 43, 77, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-cancel {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-cancel:hover {
+            background-color: #e4e6ea;
+        }
+
+        .show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h2>Quản lý công việc</h2>
+            <button class="btn" id="add-task-btn">
+                <i class="fas fa-plus"></i> Thêm công việc
+            </button>
+        </div>
+
+        <div class="card">
+            <div class="filter-container">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Tìm kiếm công việc...">
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Dự án:</span>
+                    <select class="filter-select">
+                        <option value="">Tất cả</option>
+                        <option value="1">Thiết kế Website</option>
+                        <option value="2">Phát triển Mobile App</option>
+                        <option value="3">Nâng cấp hệ thống CRM</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Trạng thái:</span>
+                    <select class="filter-select">
+                        <option value="">Tất cả</option>
+                        <option value="todo">Cần làm</option>
+                        <option value="progress">Đang tiến hành</option>
+                        <option value="review">Đánh giá</option>
+                        <option value="done">Hoàn thành</option>
+                        <option value="overdue">Quá hạn</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Người được giao:</span>
+                    <select class="filter-select">
+                        <option value="">Tất cả</option>
+                        <option value="1">Nguyễn Văn A</option>
+                        <option value="2">Trần Thị B</option>
+                        <option value="3">Lê Văn C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Công việc</th>
+                            <th>Dự án</th>
+                            <th>Trạng thái</th>
+                            <th>Ưu tiên</th>
+                            <th>SLA (ngày)</th>
+                            <th>Ngày bắt đầu</th>
+                            <th>Hạn chót</th>
+                            <th>Người được giao</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Thiết kế giao diện trang chủ</td>
+                            <td>Thiết kế Website</td>
+                            <td><span class="status status-progress">Đang tiến hành</span></td>
+                            <td>
+                                <div class="priority">
+                                    <div class="priority-indicator priority-high"></div>
+                                    Cao
+                                </div>
+                            </td>
+                            <td>5</td>
+                            <td>05/04/2025</td>
+                            <td>10/04/2025</td>
+                            <td>
+                                <div class="avatar">NVA</div>
+                            </td>
+                            <td>
+                                <i class="fas fa-eye action-icon" title="Xem chi tiết"></i>
+                                <i class="fas fa-edit action-icon" title="Chỉnh sửa"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Xóa"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Phát triển chức năng đăng nhập</td>
+                            <td>Phát triển Mobile App</td>
+                            <td><span class="status status-review">Đánh giá</span></td>
+                            <td>
+                                <div class="priority">
+                                    <div class="priority-indicator priority-medium"></div>
+                                    Trung bình
+                                </div>
+                            </td>
+                            <td>3</td>
+                            <td>02/04/2025</td>
+                            <td>05/04/2025</td>
+                            <td>
+                                <div class="avatar">TTB</div>
+                            </td>
+                            <td>
+                                <i class="fas fa-eye action-icon" title="Xem chi tiết"></i>
+                                <i class="fas fa-edit action-icon" title="Chỉnh sửa"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Xóa"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tối ưu hóa cơ sở dữ liệu</td>
+                            <td>Nâng cấp hệ thống CRM</td>
+                            <td><span class="status status-overdue">Quá hạn</span></td>
+                            <td>
+                                <div class="priority">
+                                    <div class="priority-indicator priority-high"></div>
+                                    Cao
+                                </div>
+                            </td>
+                            <td>4</td>
+                            <td>01/04/2025</td>
+                            <td>05/04/2025</td>
+                            <td>
+                                <div class="avatar">LVC</div>
+                            </td>
+                            <td>
+                                <i class="fas fa-eye action-icon" title="Xem chi tiết"></i>
+                                <i class="fas fa-edit action-icon" title="Chỉnh sửa"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Xóa"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Viết tài liệu API</td>
+                            <td>Phát triển Mobile App</td>
+                            <td><span class="status status-todo">Cần làm</span></td>
+                            <td>
+                                <div class="priority">
+                                    <div class="priority-indicator priority-low"></div>
+                                    Thấp
+                                </div>
+                            </td>
+                            <td>7</td>
+                            <td>10/04/2025</td>
+                            <td>17/04/2025</td>
+                            <td>
+                                <div class="avatar">NVA</div>
+                            </td>
+                            <td>
+                                <i class="fas fa-eye action-icon" title="Xem chi tiết"></i>
+                                <i class="fas fa-edit action-icon" title="Chỉnh sửa"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Xóa"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kiểm thử tính năng thanh toán</td>
+                            <td>Thiết kế Website</td>
+                            <td><span class="status status-done">Hoàn thành</span></td>
+                            <td>
+                                <div class="priority">
+                                    <div class="priority-indicator priority-high"></div>
+                                    Cao
+                                </div>
+                            </td>
+                            <td>6</td>
+                            <td>01/04/2025</td>
+                            <td>07/04/2025</td>
+                            <td>
+                                <div class="avatar">TTB</div>
+                            </td>
+                            <td>
+                                <i class="fas fa-eye action-icon" title="Xem chi tiết"></i>
+                                <i class="fas fa-edit action-icon" title="Chỉnh sửa"></i>
+                                <i class="fas fa-trash-alt action-icon" title="Xóa"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <div class="page-item active">1</div>
+                <div class="page-item">2</div>
+                <div class="page-item">3</div>
+                <div class="page-item"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thêm Công Việc -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Thêm công việc mới</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="task-form">
+                    <div class="form-group">
+                        <label for="task-name">Tên công việc</label>
+                        <input type="text" id="task-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-description">Mô tả</label>
+                        <textarea id="task-description"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-project">Dự án</label>
+                            <select id="task-project" required>
+                                <option value="">Chọn dự án</option>
+                                <option value="1">Thiết kế Website</option>
+                                <option value="2">Phát triển Mobile App</option>
+                                <option value="3">Nâng cấp hệ thống CRM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-status">Trạng thái</label>
+                            <select id="task-status" required>
+                                <option value="todo">Cần làm</option>
+                                <option value="progress">Đang tiến hành</option>
+                                <option value="review">Đánh giá</option>
+                                <option value="done">Hoàn thành</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-priority">Ưu tiên</label>
+                            <select id="task-priority" required>
+                                <option value="low">Thấp</option>
+                                <option value="medium">Trung bình</option>
+                                <option value="high">Cao</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-assignee">Người được giao</label>
+                            <select id="task-assignee" required>
+                                <option value="">Chọn người</option>
+                                <option value="1">Nguyễn Văn A</option>
+                                <option value="2">Trần Thị B</option>
+                                <option value="3">Lê Văn C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-sla">SLA (ngày)</label>
+                            <input type="number" id="task-sla" min="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-start-date">Ngày bắt đầu</label>
+                            <input type="date" id="task-start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-due-date">Ngày hạn chót</label>
+                            <input type="date" id="task-due-date" required>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-cancel">Hủy</button>
+                        <button type="submit" class="btn">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kết nối với trang chính
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal handling
+            const modal = document.getElementById('task-modal');
+            const addTaskBtn = document.getElementById('add-task-btn');
+            const closeBtn = document.querySelector('.close-btn');
+            const cancelBtn = document.querySelector('.btn-cancel');
+            
+            // Mở modal
+            addTaskBtn.addEventListener('click', function() {
+                modal.classList.add('show');
+            });
+            
+            // Đóng modal
+            closeBtn.addEventListener('click', function() {
+                modal.classList.remove('show');
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                modal.classList.remove('show');
+            });
+            
+            // Xử lý form submit
+            const taskForm = document.getElementById('task-form');
+            taskForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Xử lý dữ liệu form và gửi về server
+                const formData = {
+                    name: document.getElementById('task-name').value,
+                    description: document.getElementById('task-description').value,
+                    project: document.getElementById('task-project').value,
+                    status: document.getElementById('task-status').value,
+                    priority: document.getElementById('task-priority').value,
+                    assignee: document.getElementById('task-assignee').value,
+                    sla: document.getElementById('task-sla').value,
+                    startDate: document.getElementById('task-start-date').value,
+                    dueDate: document.getElementById('task-due-date').value
+                };
+                
+                console.log('Task data:', formData);
+                // Gửi dữ liệu đến API hoặc xử lý ở đây
+                
+                // Đóng modal sau khi submit
+                modal.classList.remove('show');
+                
+                // Reset form
+                taskForm.reset();
+                
+                // Thông báo thành công (có thể thay thế bằng toast notification)
+                alert('Đã thêm công việc mới thành công!');
+            });
+            
+            // Liên kết với menu từ trang chính - khi load trang thông báo cho trang chính biết trang nào đang được mở
+            setTimeout(function() {
+                try {
+                    window.parent.postMessage({ action: 'selectTab', tab: 'tasks' }, '*');
+                } catch (e) {
+                    console.log('Could not communicate with parent window:', e);
+                }
+            }, 100);
+            
+            // Lắng nghe thông báo từ trang chính
+            window.addEventListener('message', function(event) {
+                // Xử lý thông báo từ trang chính nếu cần
+                console.log('Received message from parent:', event.data);
+            });
+            
+            // Xử lý các tác vụ trong bảng
+            const actionIcons = document.querySelectorAll('.action-icon');
+            actionIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const action = this.getAttribute('title');
+                    const row = this.closest('tr');
+                    const taskName = row.querySelector('td:first-child').textContent;
+                    
+                    console.log(`Thực hiện ${action} cho công việc: ${taskName}`);
+                    // Thực hiện hành động tương ứng (xem, sửa, xóa)
+                    if (action.includes('Xem')) {
+                        alert(`Xem chi tiết công việc: ${taskName}`);
+                    } else if (action.includes('Chỉnh')) {
+                        alert(`Chỉnh sửa công việc: ${taskName}`);
+                    } else if (action.includes('Xóa')) {
+                        if (confirm(`Bạn có chắc muốn xóa công việc: ${taskName}?`)) {
+                            alert(`Đã xóa công việc: ${taskName}`);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

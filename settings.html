@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectTrack - Cài đặt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-light: #4c9aff;
+            --secondary: #6554c0;
+            --success: #36b37e;
+            --warning: #ffab00;
+            --danger: #ff5630;
+            --gray-dark: #172b4d;
+            --gray: #505f79;
+            --gray-light: #f4f5f7;
+            --white: #ffffff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0047b3;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5648a8;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background-color: #2d9969;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background-color: #e64c27;
+        }
+
+        .settings-layout {
+            display: flex;
+            gap: 20px;
+        }
+
+        .settings-sidebar {
+            width: 250px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+        }
+
+        .settings-menu {
+            list-style-type: none;
+        }
+
+        .settings-menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .settings-menu-item.active {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+
+        .settings-menu-item:hover:not(.active) {
+            background-color: var(--gray-light);
+        }
+
+        .settings-menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .settings-content {
+            flex: 1;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .settings-subtitle {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--gray-light);
+            margin: 20px 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+
+        .setting-description {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .avatar-upload {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 36px;
+            overflow: hidden;
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .avatar-controls .btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .color-option {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-choice {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .color-choice.active {
+            border-color: var(--gray-dark);
+        }
+
+        .color-blue {
+            background-color: #0052cc;
+        }
+
+        .color-purple {
+            background-color: #6554c0;
+        }
+
+        .color-red {
+            background-color: #ff5630;
+        }
+
+        .color-green {
+            background-color: #36b37e;
+        }
+
+        .color-orange {
+            background-color: #ff8b00;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-cancel {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .btn-cancel:hover {
+            background-color: #e4e6ea;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .notification-setting {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .notification-setting:last-child {
+            border-bottom: none;
+        }
+
+        .notification-channels {
+            display: flex;
+            gap: 15px;
+        }
+
+        .channel-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .channel-label {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .member-card {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid var(--gray-light);
+            align-items: center;
+        }
+
+        .member-card:last-child {
+            border-bottom: none;
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .member-email {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .member-role {
+            font-size: 12px;
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            background-color: var(--gray-light);
+            margin-left: 10px;
+        }
+
+        .role-admin {
+            background-color: rgba(101, 84, 192, 0.1);
+            color: var(--secondary);
+        }
+
+        .role-manager {
+            background-color: rgba(0, 82, 204, 0.1);
+            color: var(--primary);
+        }
+
+        .role-member {
+            background-color: rgba(54, 179, 126, 0.1);
+            color: var(--success);
+        }
+
+        .member-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .api-key-section {
+            background-color: var(--gray-light);
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .api-key-display {
+            font-family: monospace;
+            background-color: var(--white);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .api-key-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .api-key-copy {
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        .webhook-card {
+            padding: 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .webhook-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .webhook-title {
+            font-weight: 500;
+        }
+
+        .webhook-url {
+            font-family: monospace;
+            background-color: var(--gray-light);
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+
+        .webhook-events {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .webhook-event {
+            font-size: 12px;
+            padding: 3px 8px;
+            background-color: var(--gray-light);
+            border-radius: 12px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .settings-layout {
+                flex-direction: column;
+            }
+            
+            .settings-sidebar {
+                width: 100%;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .avatar-upload {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h2>Cài đặt</h2>
+        </div>
+
+        <div class="settings-layout">
+            <!-- Sidebar Menu -->
+            <div class="settings-sidebar">
+                <ul class="settings-menu">
+                    <li class="settings-menu-item active" data-section="profile">
+                        <i class="fas fa-user"></i> Hồ sơ cá nhân
+                    </li>
+                    <li class="settings-menu-item" data-section="account">
+                        <i class="fas fa-shield-alt"></i> Tài khoản & Bảo mật
+                    </li>
+                    <li class="settings-menu-item" data-section="notifications">
+                        <i class="fas fa-bell"></i> Thông báo
+                    </li>
+                    <li class="settings-menu-item" data-section="appearance">
+                        <i class="fas fa-palette"></i> Giao diện
+                    </li>
+                    <li class="settings-menu-item" data-section="workspace">
+                        <i class="fas fa-building"></i> Không gian làm việc
+                    </li>
+                    <li class="settings-menu-item" data-section="team">
+                        <i class="fas fa-users"></i> Quản lý nhóm
+                    </li>
+                    <li class="settings-menu-item" data-section="integration">
+                        <i class="fas fa-plug"></i> Tích hợp
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Section -->
+                <div class="settings-section active" id="profile">
+                    <h3 class="settings-title">Hồ sơ cá nhân</h3>
+                    <p class="settings-subtitle">Quản lý thông tin cá nhân của bạn.</p>
+                    
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <span>NT</span>
+                        </div>
+                        <div class="avatar-controls">
+                            <button class="btn">Thay đổi ảnh</button>
+                            <button class="btn btn-cancel">Xóa ảnh</button>
+                        </div>
+                    </div>
+                    
+                    <form id="profile-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstname">Tên</label>
+                                <input type="text" id="firstname" value="Nguyễn">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Họ</label>
+                                <input type="text" id="lastname" value="Thành">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="nguyen.thanh@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" id="phone" value="+84 123 456 789">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="position">Chức vụ</label>
+                            <input type="text" id="position" value="Quản lý dự án">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="department">Phòng ban</label>
+                            <input type="text" id="department" value="Phát triển sản phẩm">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bio">Tiểu sử</label>
+                            <textarea id="bio">Quản lý dự án với 5 năm kinh nghiệm trong lĩnh vực phát triển phần mềm và thiết kế sản phẩm.</textarea>
+                        </div>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="action-buttons">
+                            <button type="button" class="btn btn-cancel">Hủy</button>
+                            <button type="submit" class="btn btn-success">Lưu thay đổi</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Account & Security Section -->
+                <div class="settings-section" id="account">
+                    <h3 class="settings-title">Tài khoản & Bảo mật</h3>
+                    <p class="settings-subtitle">Quản lý tài khoản và thiết lập bảo mật.</p>
+                    
+                    <h4>Thay đổi mật khẩu</h4>
+                    <form id="password-form">
+                        <div class="form-group">
+                            <label for="current-password">Mật khẩu hiện tại</label>
+                            <input type="password" id="current-password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="new-password">Mật khẩu mới</label>
+                            <input type="password" id="new-password">
+                            <p class="form-hint">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                            <input type="password" id="confirm-password">
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button type="submit" class="btn">Cập nhật mật khẩu</button>
+                        </div>
+                    </form>
+                    
+                    <div class="divider"></div>
+                    
+                    <h4>Bảo mật tài khoản</h4>
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <div class="setting-name">Xác thực hai yếu tố</div>
+                            <div class="setting-description">Bảo vệ tài khoản của bạn bằng cách thêm lớp bảo mật thứ hai.</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <div class="setting-name">Đăng xuất từ tất cả thiết bị</div>
+                            <div class="setting-description">Đăng xuất khỏi tất cả các phiên đăng nhập khác ngoại trừ phiên hiện tại.</div>
+                        </div>
+                        <button class="btn btn-secondary">Đăng xuất</button>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <h4>Quản lý tài khoản</h4>
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <div class="setting-name">Xuất dữ liệu</div>
+                            <div class="setting-description">Tải xuống bản sao dữ liệu tài khoản của bạn.</div>
+                        </div>
+                        <button class="btn btn-secondary">Xuất dữ liệu</button>
+                    </div>
+                    
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <div class="setting-name">Xóa tài khoản</div>
+                            <div class="setting-description">Xóa vĩnh viễn tài khoản và tất cả dữ liệu liên quan.</div>
+                        </div>
+                        <button class="btn btn-danger">Xóa tài khoản</button>
+                    </div>
+                </div>
+
+                <!-- Notifications Section -->
+                <div class="settings-section" id="notifications">
+                    <h3 class="settings-title">Thông báo</h3>
+                    <p class="settings-subtitle">Quản lý cách bạn nhận thông báo.</p>
+                    
+                    <div class="card">
+                        <h4>Thông báo đẩy</h4>
+                        
+                        <div class="notification-setting">
+                            <div class="setting-info">
+                                <div class="setting-name">Thông báo đẩy</div>
+                                <div class="setting-description">Cho phép nhận thông báo trên trình duyệt.</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Tùy chọn thông báo</h4>
+                        
+                        <div class="notification-setting">
+                            <div class="setting-info">
+                                <div class="setting-name">Cập nhật dự án</div>
+                                <div class="setting-description">Khi có thay đổi trong dự án bạn tham gia.</div>
+                            </div>
+                            <div class="notification-channels">
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Email</div>
+                                </div>
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Ứng dụng</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-setting">
+                            <div class="setting-info">
+                                <div class="setting-name">Nhắc nhở công việc</div>
+                                <div class="setting-description">Khi đến hạn chót hoàn thành công việc.</div>
+                            </div>
+                            <div class="notification-channels">
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Email</div>
+                                </div>
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Ứng dụng</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-setting">
+                            <div class="setting-info">
+                                <div class="setting-name">Bình luận</div>
+                                <div class="setting-description">Khi có ai đó bình luận về công việc.</div>
+                            </div>
+                            <div class="notification-channels">
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Email</div>
+                                </div>
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Ứng dụng</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-setting">
+                            <div class="setting-info">
+                                <div class="setting-name">Cuộc họp</div>
+                                <div class="setting-description">Nhắc nhở về cuộc họp sắp diễn ra.</div>
+                            </div>
+                            <div class="notification-channels">
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Email</div>
+                                </div>
+                                <div class="channel-toggle">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <div class="channel-label">Ứng dụng</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-success">Lưu thay đổi</button>
+                    </div>
+                </div>
+
+                <!-- Appearance Section -->
+                <div class="settings-section" id="appearance">
+                    <h3 class="settings-title">Giao diện</h3>
+                    <p class="settings-subtitle">Tùy chỉnh giao diện ứng dụng.</p>
+                    
+                    <div class="form-group">
+                        <label>Chế độ</label>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <div class="setting-name">Chế độ tối</div>
+                                <div class="setting-description">Áp dụng giao diện tối cho ứng dụng.</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Màu chính</label>
+                        <div class="color-option">
+                            <div class="color-choice color-blue active"></div>
+                            <div class="color-choice color-purple"></div>
+                            <div class="color-choice color-red"></div>
+                            <div class="color-choice color-green"></div>
+                            <div class="color-choice color-orange"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Hiệu ứng</label>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <div class="setting-name">Hiệu ứng chuyển đổi</div>
+                                <div class="setting-description">Hiệu ứng mượt mà khi chuyển đổi giữa các trang.</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Bố cục</label>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <div class="setting-name">Chế độ rộng</div>
+                                <div class="setting-description">Mở rộng bố cục để sử dụng toàn bộ màn hình.</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-cancel">Khôi phục mặc định</button>
+                        <button class="btn btn-success">Lưu thay đổi</button>
+                    </div>
+                </div>
+
+                <!-- Workspace Settings -->
+                <div class="settings-section" id="workspace">
+                    <h3 class="settings-title">Không gian làm việc</h3>
+                    <p class="settings-subtitle">Quản lý cài đặt không gian làm việc của bạn.</p>
+                    
+                    <div class="form-group">
+                        <label for="workspace-name">Tên không gian làm việc</label>
+                        <input type="text" id="workspace-name" value="Công ty ABC">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workspace-url">URL không gian làm việc</label>
+                        <input type="text" id="workspace-url" value="abc-company" disabled>
+                        <p class="form-hint">URL đầy đủ: projecttrack.com/abc-company</p>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <h4>Tùy chọn dự án</h4>
+                    
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <div class="setting-name">Tạo báo cáo tự động</div>
+                            <div class="setting-description">Tự động tạo báo cáo hàng tuần cho các dự án.</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <div class="setting-name">Nhắc nhở hạn chót</div>
+                            <div class="setting-description">Gửi thông báo trước khi đến hạn chót 2 ngày.</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-success">Lưu thay đổi</button>
+                    </div>
+                </div>
+
+                <!-- Team Management -->
+                <div class="settings-section" id="team">
+                    <h3 class="settings-title">Quản lý nhóm</h3>
+                    <p class="settings-subtitle">Quản lý thành viên và vai trò trong nhóm.</p>
+                    
+                    <button class="btn" style="margin-bottom: 20px;">
+                        <i class="fas fa-user-plus"></i> Thêm thành viên
+                    </button>
+                    
+                    <div class="card">
+                        <div class="member-card">
+                            <div class="member-avatar">NV</div>
+                            <div class="member-info">
+                                <div class="member-name">Nguyễn Văn A <span class="member-role role-admin">Admin</span></div>
+                                <div class="member-email">nguyen.vana@example.com</div>
+                            </div>
+                            <div class="member-actions">
+                                <button class="btn btn-secondary">Chỉnh sửa</button>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-avatar">TT</div>
+                            <div class="member-info">
+                                <div class="member-name">Trần Thị B <span class="member-role role-manager">Quản lý</span></div>
+                                <div class="member-email">tran.thib@example.com</div>
+                            </div>
+                            <div class="member-actions">
+                                <button class="btn btn-secondary">Chỉnh sửa</button>
+                            </div>
+                        </div>
+                        
+                        <div class="member-card">
+                            <div class="member-avatar">LV</div>
+                            <div class="member-info">
+                                <div class="member-name">Lê Văn C <span class="member-role role-member">Thành viên</span></div>
+                                <div class="member-email">le.vanc@example.com</div>
+                            </div>
+                            <div class="member-actions">
+                                <button class="btn btn-secondary">Chỉnh sửa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration -->
+                <div class="settings-section" id="integration">
+                    <h3 class="settings-title">Tích hợp</h3>
+                    <p class="settings-subtitle">Quản lý tích hợp với các công cụ và dịch vụ khác.</p>
+                    
+                    <div class="card" style="margin-bottom: 30px;">
+                        <h4>API Key</h4>
+                        <p>Sử dụng API key để tích hợp với các ứng dụng khác.</p>
+                        
+                        <div class="api-key-section">
+                            <div>API Key của bạn:</div>
+                            <div class="api-key-display">
+                                <span>••••••••••••••••••••••••••••</span>
+                                <div class="api-key-actions">
+                                    <span class="api-key-copy"><i class="fas fa-copy"></i> Sao chép</span>
+                                </div>
+                            </div>
+                            <button class="btn">Tạo lại API Key</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>Webhooks</h4>
+                        <p>Tạo webhook để nhận thông báo khi có sự kiện xảy ra.</p>
+                        
+                        <button class="btn" style="margin: 15px 0;">
+                            <i class="fas fa-plus"></i> Thêm webhook
+                        </button>
+                        
+                        <div class="webhook-card">
+                            <div class="webhook-header">
+                                <div class="webhook-title">Webhook Slack</div>
+                                <div>
+                                    <button class="btn btn-secondary">Chỉnh sửa</button>
+                                </div>
+                            </div>
+                            <div class="webhook-url">https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX</div>
+                            <div>Sự kiện:</div>
+                            <div class="webhook-events">
+                                <div class="webhook-event">Tạo dự án</div>
+                                <div class="webhook-event">Cập nhật dự án</div>
+                                <div class="webhook-event">Hoàn thành dự án</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Liên kết với trang chính - thông báo cho trang chính biết đang ở trang Settings
+            setTimeout(function() {
+                try {
+                    window.parent.postMessage({ action: 'selectTab', tab: 'settings' }, '*');
+                } catch (e) {
+                    console.log('Could not communicate with parent window:', e);
+                }
+            }, 100);
+            
+            // Lắng nghe thông báo từ trang chính
+            window.addEventListener('message', function(event) {
+                console.log('Received message from parent:', event.data);
+            });
+            
+            // Settings menu handling
+            const menuItems = document.querySelectorAll('.settings-menu-item');
+            const settingsSections = document.querySelectorAll('.settings-section');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all menu items
+                    menuItems.forEach(mi => mi.classList.remove('active'));
+                    
+                    // Add active class to clicked menu item
+                    this.classList.add('active');
+                    
+                    // Get the section id
+                    const sectionId = this.getAttribute('data-section');
+                    
+                    // Hide all sections
+                    settingsSections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show the selected section
+                    document.getElementById(sectionId).classList.add('active');
+                });
+            });
+            
+            // Color theme handling
+            const colorChoices = document.querySelectorAll('.color-choice');
+            colorChoices.forEach(color => {
+                color.addEventListener('click', function() {
+                    // Remove active class from all color choices
+                    colorChoices.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked color choice
+                    this.classList.add('active');
+                    
+                    // Get the selected color (in a real application, would apply theme)
+                    const colorClass = this.classList[1]; // e.g., 'color-blue'
+                    console.log('Selected color theme:', colorClass);
+                });
+            });
+            
+            // Form handling
+            const profileForm = document.getElementById('profile-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thay đổi hồ sơ đã được lưu!');
+                });
+            }
+            
+            // API Key Copy
+            const apiKeyCopy = document.querySelector('.api-key-copy');
+            if (apiKeyCopy) {
+                apiKeyCopy.addEventListener('click', function() {
+                    alert('Đã sao chép API Key vào clipboard!');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

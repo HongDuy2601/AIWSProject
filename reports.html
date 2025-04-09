@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectTrack - Báo cáo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        :root {
+            --primary: #0052cc;
+            --primary-light: #4c9aff;
+            --secondary: #6554c0;
+            --success: #36b37e;
+            --warning: #ffab00;
+            --danger: #ff5630;
+            --gray-dark: #172b4d;
+            --gray: #505f79;
+            --gray-light: #f4f5f7;
+            --white: #ffffff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #0047b3;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5648a8;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .filter-select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .big-chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+
+        .tab-navigation {
+            display: flex;
+            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 20px;
+        }
+
+        .tab-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab-item.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .stat-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .icon-primary {
+            background-color: rgba(0, 82, 204, 0.1);
+            color: var(--primary);
+        }
+
+        .icon-success {
+            background-color: rgba(54, 179, 126, 0.1);
+            color: var(--success);
+        }
+
+        .icon-warning {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .icon-danger {
+            background-color: rgba(255, 86, 48, 0.1);
+            color: var(--danger);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: var(--gray-light);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .summary-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .summary-header {
+            padding: 15px 20px;
+            background-color: var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-body {
+            padding: 20px;
+        }
+
+        .summary-footer {
+            padding: 15px 20px;
+            background-color: var(--gray-light);
+            text-align: center;
+            font-weight: 500;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .summary-footer:hover {
+            background-color: #e4e6ea;
+        }
+
+        .summary-list {
+            list-style-type: none;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--gray);
+        }
+
+        .summary-value {
+            font-weight: 500;
+        }
+
+        .export-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .export-btn {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .export-btn:hover {
+            background-color: #e4e6ea;
+        }
+
+        .progress-container {
+            height: 8px;
+            background-color: var(--gray-light);
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--primary);
+        }
+
+        .date-range-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-input {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            width: 130px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background-color: rgba(54, 179, 126, 0.1);
+            color: var(--success);
+        }
+
+        .status-warning {
+            background-color: rgba(255, 171, 0, 0.1);
+            color: var(--warning);
+        }
+
+        .status-danger {
+            background-color: rgba(255, 86, 48, 0.1);
+            color: var(--danger);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-4, .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .date-range-picker {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <h2>Báo cáo</h2>
+            <div class="export-options">
+                <button class="export-btn">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>PDF</span>
+                </button>
+                <button class="export-btn">
+                    <i class="fas fa-file-excel"></i>
+                    <span>Excel</span>
+                </button>
+                <button class="export-btn">
+                    <i class="fas fa-print"></i>
+                    <span>In</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <div class="filter-group">
+                <span class="filter-label">Thời gian:</span>
+                <div class="date-range-picker">
+                    <input type="date" class="date-input" id="start-date" value="2025-03-01">
+                    <span>đến</span>
+                    <input type="date" class="date-input" id="end-date" value="2025-04-09">
+                    <button class="btn">Áp dụng</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Dự án:</span>
+                <select class="filter-select" id="project-filter">
+                    <option value="">Tất cả dự án</option>
+                    <option value="1">Thiết kế Website</option>
+                    <option value="2">Phát triển Mobile App</option>
+                    <option value="3">Nâng cấp hệ thống CRM</option>
+                    <option value="4">Tối ưu SEO</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="tab-navigation">
+            <div class="tab-item active" data-tab="overview">Tổng quan</div>
+            <div class="tab-item" data-tab="projects">Dự án</div>
+            <div class="tab-item" data-tab="performance">Hiệu suất</div>
+            <div class="tab-item" data-tab="sla">SLA</div>
+        </div>
+
+        <!-- Tab Tổng quan -->
+        <div class="tab-content active" id="overview">
+            <div class="grid-4">
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon icon-primary">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>Tổng số dự án</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon icon-success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Dự án hoàn thành</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon icon-warning">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>28</h3>
+                            <p>Công việc đã tạo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="stat-card">
+                        <div class="stat-icon icon-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>3</h3>
+                            <p>Công việc quá hạn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tiến độ dự án</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="projectProgressChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Trạng thái công việc</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="taskStatusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Biểu đồ hoạt động theo thời gian</h3>
+                </div>
+                <div class="big-chart-container">
+                    <canvas id="activityTimelineChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="card summary-card">
+                    <div class="summary-header">
+                        <h3 class="card-title">Tóm tắt dự án</h3>
+                    </div>
+                    <div class="summary-body">
+                        <ul class="summary-list">
+                            <li class="summary-item">
+                                <span class="summary-label">Đang hoạt động</span>
+                                <span class="summary-value">3</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Tạm dừng</span>
+                                <span class="summary-value">1</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Hoàn thành</span>
+                                <span class="summary-value">4</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Quá hạn</span>
+                                <span class="summary-value">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="summary-footer">
+                        Xem chi tiết
+                    </div>
+                </div>
+                <div class="card summary-card">
+                    <div class="summary-header">
+                        <h3 class="card-title">Tóm tắt công việc</h3>
+                    </div>
+                    <div class="summary-body">
+                        <ul class="summary-list">
+                            <li class="summary-item">
+                                <span class="summary-label">Cần làm</span>
+                                <span class="summary-value">7</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Đang tiến hành</span>
+                                <span class="summary-value">12</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Đánh giá</span>
+                                <span class="summary-value">5</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Hoàn thành</span>
+                                <span class="summary-value">4</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="summary-footer">
+                        Xem chi tiết
+                    </div>
+                </div>
+                <div class="card summary-card">
+                    <div class="summary-header">
+                        <h3 class="card-title">Thời gian làm việc</h3>
+                    </div>
+                    <div class="summary-body">
+                        <ul class="summary-list">
+                            <li class="summary-item">
+                                <span class="summary-label">Thời gian ước tính</span>
+                                <span class="summary-value">320 giờ</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Thời gian thực tế</span>
+                                <span class="summary-value">285 giờ</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Thời gian còn lại</span>
+                                <span class="summary-value">35 giờ</span>
+                            </li>
+                            <li class="summary-item">
+                                <span class="summary-label">Hiệu suất</span>
+                                <span class="summary-value">89%</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="summary-footer">
+                        Xem chi tiết
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Dự án -->
+        <div class="tab-content" id="projects">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tổng quan dự án</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="projectOverviewChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Hiệu suất dự án</h3>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tên dự án</th>
+                                <th>Trạng thái</th>
+                                <th>Tiến độ</th>
+                                <th>Thời gian dự kiến</th>
+                                <th>Thời gian thực tế</th>
+                                <th>SLA</th>
+                                <th>Hiệu suất</th>
+                                <th>Chi phí</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Thiết kế Website</td>
+                                <td><span class="status status-danger">Quá hạn</span></td>
+                                <td>Lê Văn C</td>
+                            </tr>
+                            <tr>
+                                <td>Phát triển chức năng đăng nhập</td>
+                                <td>3</td>
+                                <td>02/04/2025</td>
+                                <td>05/04/2025</td>
+                                <td>4 ngày</td>
+                                <td><span class="status status-warning">Sắp quá hạn</span></td>
+                                <td>Trần Thị B</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Navigation
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all tab items
+                    tabItems.forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked tab item
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Chart JS Implementation
+            // Tiến độ dự án
+            const projectProgressCtx = document.getElementById('projectProgressChart').getContext('2d');
+            const projectProgressChart = new Chart(projectProgressCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Thiết kế Website', 'Phát triển Mobile App', 'Nâng cấp hệ thống CRM', 'Tối ưu SEO'],
+                    datasets: [{
+                        label: 'Tiến độ (%)',
+                        data: [70, 45, 65, 100],
+                        backgroundColor: [
+                            'rgba(76, 154, 255, 0.6)',
+                            'rgba(255, 171, 0, 0.6)',
+                            'rgba(255, 86, 48, 0.6)',
+                            'rgba(54, 179, 126, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(76, 154, 255, 1)',
+                            'rgba(255, 171, 0, 1)',
+                            'rgba(255, 86, 48, 1)',
+                            'rgba(54, 179, 126, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Trạng thái công việc
+            const taskStatusCtx = document.getElementById('taskStatusChart').getContext('2d');
+            const taskStatusChart = new Chart(taskStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Cần làm', 'Đang tiến hành', 'Đánh giá', 'Hoàn thành', 'Quá hạn'],
+                    datasets: [{
+                        data: [7, 12, 5, 4, 3],
+                        backgroundColor: [
+                            'rgba(76, 154, 255, 0.6)',
+                            'rgba(255, 171, 0, 0.6)',
+                            'rgba(101, 84, 192, 0.6)',
+                            'rgba(54, 179, 126, 0.6)',
+                            'rgba(255, 86, 48, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(76, 154, 255, 1)',
+                            'rgba(255, 171, 0, 1)',
+                            'rgba(101, 84, 192, 1)',
+                            'rgba(54, 179, 126, 1)',
+                            'rgba(255, 86, 48, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
+                }
+            });
+
+            // Biểu đồ hoạt động theo thời gian
+            const activityTimelineCtx = document.getElementById('activityTimelineChart').getContext('2d');
+            const activityTimelineChart = new Chart(activityTimelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['01/03', '08/03', '15/03', '22/03', '29/03', '05/04', '09/04'],
+                    datasets: [
+                        {
+                            label: 'Công việc đã tạo',
+                            data: [4, 7, 12, 15, 20, 25, 28],
+                            borderColor: 'rgba(76, 154, 255, 1)',
+                            backgroundColor: 'rgba(76, 154, 255, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Công việc hoàn thành',
+                            data: [0, 2, 5, 8, 10, 15, 20],
+                            borderColor: 'rgba(54, 179, 126, 1)',
+                            backgroundColor: 'rgba(54, 179, 126, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Các biểu đồ khác (chỉ hiển thị khi tab tương ứng được chọn)
+            // Hiệu suất nhân viên
+            const employeePerformanceCtx = document.getElementById('employeePerformanceChart').getContext('2d');
+            const employeePerformanceChart = new Chart(employeePerformanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Nguyễn Văn A', 'Trần Thị B', 'Lê Văn C'],
+                    datasets: [{
+                        label: 'Hiệu suất (%)',
+                        data: [92, 88, 75],
+                        backgroundColor: [
+                            'rgba(54, 179, 126, 0.6)',
+                            'rgba(54, 179, 126, 0.6)',
+                            'rgba(255, 171, 0, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 179, 126, 1)',
+                            'rgba(54, 179, 126, 1)',
+                            'rgba(255, 171, 0, 1)'
+                        ],
+                        borderWidth: ;
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Khởi tạo thêm các biểu đồ khi cần
+            
+            // Liên kết với trang chính - thông báo cho trang chính biết đang ở trang Reports
+            setTimeout(function() {
+                try {
+                    window.parent.postMessage({ action: 'selectTab', tab: 'reports' }, '*');
+                } catch (e) {
+                    console.log('Could not communicate with parent window:', e);
+                }
+            }, 100);
+            
+            // Lắng nghe thông báo từ trang chính
+            window.addEventListener('message', function(event) {
+                console.log('Received message from parent:', event.data);
+            });
+        });
+    </script>
+</body>
+</html> status-warning">Đang hoạt động</span></td>
+                                <td>
+                                    <div>70%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 70%;"></div>
+                                    </div>
+                                </td>
+                                <td>80 giờ</td>
+                                <td>72 giờ</td>
+                                <td>15 ngày</td>
+                                <td>90%</td>
+                                <td>$12,500</td>
+                            </tr>
+                            <tr>
+                                <td>Phát triển Mobile App</td>
+                                <td><span class="status status-warning">Tạm dừng</span></td>
+                                <td>
+                                    <div>45%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 45%;"></div>
+                                    </div>
+                                </td>
+                                <td>160 giờ</td>
+                                <td>65 giờ</td>
+                                <td>30 ngày</td>
+                                <td>85%</td>
+                                <td>$28,000</td>
+                            </tr>
+                            <tr>
+                                <td>Nâng cấp hệ thống CRM</td>
+                                <td><span class="status status-danger">Quá hạn</span></td>
+                                <td>
+                                    <div>65%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 65%; background-color: var(--danger);"></div>
+                                    </div>
+                                </td>
+                                <td>60 giờ</td>
+                                <td>55 giờ</td>
+                                <td>20 ngày</td>
+                                <td>78%</td>
+                                <td>$9,800</td>
+                            </tr>
+                            <tr>
+                                <td>Tối ưu SEO</td>
+                                <td><span class="status status-success">Hoàn thành</span></td>
+                                <td>
+                                    <div>100%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 100%; background-color: var(--success);"></div>
+                                    </div>
+                                </td>
+                                <td>40 giờ</td>
+                                <td>36 giờ</td>
+                                <td>30 ngày</td>
+                                <td>95%</td>
+                                <td>$5,200</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Hiệu suất -->
+        <div class="tab-content" id="performance">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Hiệu suất theo nhân viên</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="employeePerformanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Phân bổ thời gian làm việc</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="workTimeDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Hiệu suất nhân viên</h3>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nhân viên</th>
+                                <th>Số dự án tham gia</th>
+                                <th>Công việc được giao</th>
+                                <th>Hoàn thành</th>
+                                <th>Đang xử lý</th>
+                                <th>Quá hạn</th>
+                                <th>Thời gian làm việc</th>
+                                <th>Hiệu suất</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nguyễn Văn A</td>
+                                <td>4</td>
+                                <td>12</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>78 giờ</td>
+                                <td>
+                                    <div>92%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 92%; background-color: var(--success);"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Trần Thị B</td>
+                                <td>3</td>
+                                <td>9</td>
+                                <td>6</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>62 giờ</td>
+                                <td>
+                                    <div>88%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 88%; background-color: var(--success);"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Lê Văn C</td>
+                                <td>3</td>
+                                <td>7</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>45 giờ</td>
+                                <td>
+                                    <div>75%</div>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 75%; background-color: var(--warning);"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab SLA -->
+        <div class="tab-content" id="sla">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tuân thủ SLA</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="slaComplianceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Báo cáo chi tiết SLA</h3>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dự án/Công việc</th>
+                                <th>SLA (ngày)</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Hạn chót</th>
+                                <th>Thời gian thực tế</th>
+                                <th>Trạng thái</th>
+                                <th>Người phụ trách</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Thiết kế Website</td>
+                                <td>15</td>
+                                <td>01/04/2025</td>
+                                <td>15/04/2025</td>
+                                <td>9 ngày (đến hiện tại)</td>
+                                <td><span class="status status-success">Đúng hạn</span></td>
+                                <td>Nguyễn Văn A</td>
+                            </tr>
+                            <tr>
+                                <td>Thiết kế giao diện trang chủ</td>
+                                <td>5</td>
+                                <td>05/04/2025</td>
+                                <td>10/04/2025</td>
+                                <td>5 ngày (đến hiện tại)</td>
+                                <td><span class="status status-warning">Cảnh báo</span></td>
+                                <td>Nguyễn Văn A</td>
+                            </tr>
+                            <tr>
+                                <td>Tối ưu hóa cơ sở dữ liệu</td>
+                                <td>4</td>
+                                <td>01/04/2025</td>
+                                <td>05/04/2025</td>
+                                <td>9 ngày</td>
+                                <td><span class="status
